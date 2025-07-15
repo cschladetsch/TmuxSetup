@@ -19,7 +19,7 @@ This repository contains a ready-to-use `.tmux.conf` file with sensible defaults
 ### Quick Install
 
 ```bash
-git clone https://github.com/yourusername/TmuxSetup.git
+git clone https://github.com/cschladetsch/TmuxSetup.git
 cd TmuxSetup
 ./scripts/install.sh
 ```
@@ -28,7 +28,7 @@ cd TmuxSetup
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/TmuxSetup.git
+   git clone https://github.com/cschladetsch/TmuxSetup.git
    cd TmuxSetup
    ```
 
