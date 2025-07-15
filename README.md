@@ -16,6 +16,16 @@ This repository contains a ready-to-use `.tmux.conf` file with sensible defaults
 
 ## Installation
 
+### Quick Install
+
+```bash
+git clone https://github.com/yourusername/TmuxSetup.git
+cd TmuxSetup
+./scripts/install.sh
+```
+
+### Manual Install
+
 1. Clone this repository:
    ```bash
    git clone https://github.com/yourusername/TmuxSetup.git
@@ -119,8 +129,35 @@ Feel free to modify `~/.tmux.conf` to suit your needs. After making changes:
 1. Save the file
 2. Either restart tmux or press `Ctrl-a` + `r` to reload the configuration
 
+### Themes
+
+The repository includes pre-built themes in the `themes/` directory:
+- **Dark theme**: Modern dark colors with high contrast
+- **Light theme**: Clean light colors for bright environments
+
+To use a theme, add this to your `~/.tmux.conf`:
+```bash
+# For dark theme
+source-file ~/path/to/TmuxSetup/themes/dark.conf
+```
+
+## Uninstallation
+
+To remove the tmux configuration and restore any backups:
+```bash
+./scripts/uninstall.sh
+```
+
 ## Requirements
 
 - tmux 2.1+ (recommended: 3.0+)
 - Terminal with 256 color support
 - (Optional) git for installing TPM
+
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

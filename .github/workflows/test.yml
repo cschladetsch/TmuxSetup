@@ -1,0 +1,80 @@
+name: Test Tmux Configuration
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  test-scripts:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Install tmux (Ubuntu)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y tmux
+        
+    - name: Install tmux (macOS)
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew install tmux
+        
+    - name: Check tmux version
+      run: tmux -V
+      
+    - name: Test install script syntax
+      run: |
+        bash -n scripts/install.sh
+        bash -n scripts/uninstall.sh
+        
+    - name: Make scripts executable
+      run: |
+        chmod +x scripts/install.sh
+        chmod +x scripts/uninstall.sh
+        
+    - name: Test configuration syntax
+      run: |
+        tmux -f .tmux.conf new-session -d -s test
+        tmux kill-session -t test
+        
+    - name: Validate themes
+      run: |
+        for theme in themes/*.conf; do
+          if [[ -f "$theme" && "$theme" != *"README"* ]]; then
+            echo "Testing theme: $theme"
+            tmux -f "$theme" new-session -d -s theme-test
+            tmux kill-session -t theme-test
+          fi
+        done
+        
+  shellcheck:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run ShellCheck
+      uses: ludeeus/action-shellcheck@master
+      with:
+        scandir: './scripts'
+        
+  markdown-lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Lint Markdown files
+      uses: articulate/actions-markdownlint@v1
+      with:
+        config: .github/markdownlint.json
+        files: '*.md'
+        ignore: node_modules

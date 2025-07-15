@@ -1,0 +1,37 @@
+# Tmux Plugin Manager
+tmux/plugins/
+.tmux/plugins/
+
+# Tmux resurrect plugin saves
+.tmux/resurrect/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*~
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# System files
+.directory
